@@ -24,3 +24,12 @@ from weather w
 where w.temperature >
 (select w1.temperature from weather w1
  where w1.recordDate = date_add(w.recordDate, interval -1 day));
+
+----------------------------------------------------------------------------------------------------------------
+-- Easy
+-- Write an SQL query to report all the classes that have at least five students.
+
+select class from (select class, count(student) as stuCnt
+from courses
+group by class) tb
+where tb.stuCnt >= 5;
