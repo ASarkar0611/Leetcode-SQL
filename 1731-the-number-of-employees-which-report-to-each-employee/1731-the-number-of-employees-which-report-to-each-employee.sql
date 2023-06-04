@@ -7,7 +7,6 @@ e1.name,
  from employees e3 
  where e3.reports_to = e1.employee_id) as average_age
 from employees e1
-#where e1.reports_to is null
 group by e1.employee_id, e1.name
 having reports_count >= 1
 order by e1.employee_id
