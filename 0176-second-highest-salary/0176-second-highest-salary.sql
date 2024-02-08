@@ -1,5 +1,10 @@
 # Write your MySQL query statement below
-select max(e.salary) as SecondHighestSalary
-from employee e
-where e.salary < 
-(select max(e1.salary) from employee e1);
+with salary_rank as
+(select *,
+        dense_rank() over (order by salary desc) as rn
+from employee)
+
+# select * from salary_rank
+
+select coalesce((select distinct salary 
+from salary_rank where rn = 2), NULL) as SecondHighestSalary;
